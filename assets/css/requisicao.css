@@ -1,13 +1,14 @@
 *{
-    background-color: black;
+    
     color: white;
     margin:0;
     padding: 0;
 }
 
-/* body{
+body{
+    background-color: black;
     width: 100vw;
-} */
+} 
 .main{
     min-width: 100vw;
     min-height: 100vh;
@@ -242,7 +243,7 @@
 }
 
 #btn button{
-
+    background-color: black;
     padding: 1% 1%;
 
 }
@@ -267,10 +268,19 @@
     margin-right: 10%;
     
   }
+
+  .chkPrioridade:checked{
+
+   background: none;
+
+  }
   
   /* Cria um círculo personalizado para o botão de opção */
   .chkPrioridade::before {
     content: "";
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     display: inline-block;
     width: 16px;
     height: 16px;
@@ -280,7 +290,6 @@
   
   /* Muda a cor do círculo quando o botão é selecionado */
  .chkPrioridade:checked::before{
-    background-color: none;
     width: 18px;
     height: 18px;
   } 

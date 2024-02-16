@@ -14,7 +14,7 @@ var totReq = 0;
 
 function adicionarCoraoFocarInput(){
 
-  const listInput = document.querySelectorAll("input");
+  const listInput = document.querySelectorAll("input:not([type=radio])");
   console.log(listInput.length);
   console.log(listInput);
 
@@ -36,7 +36,7 @@ function adicionarCoraoFocarInput(){
 
 }
 
-const radioBtns = document.querySelectorAll(".chkPrioridade");
+/* const radioBtns = document.querySelectorAll(".chkPrioridade");
 radioBtns.forEach(radioBtn => {
   
   radioBtn.addEventListener('change',e=>{
@@ -46,7 +46,7 @@ radioBtns.forEach(radioBtn => {
 
   })
 
-});
+}); */
 
 function carregarCategorias(){
 
