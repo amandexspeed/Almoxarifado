@@ -1,12 +1,11 @@
 *{
     
-    color: white;
+   
     margin:0;
     padding: 0;
 }
 
 body{
-    background-color: black;
     width: 100vw;
 } 
 .main{
@@ -243,7 +242,6 @@ body{
 }
 
 #btn button{
-    background-color: black;
     padding: 1% 1%;
 
 }

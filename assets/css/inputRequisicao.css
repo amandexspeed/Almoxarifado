@@ -1,5 +1,4 @@
 input, select{
-    background-color: black;
     border-color: #CDCDCD;
     border-style: solid;
     border-width: 1px;
@@ -89,12 +88,28 @@ input, select{
     font-size: 14px;
 }
 
+#btnGravar{
+    background-color:#0095C5 ;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 14px;
+
+}
+
 .modal{
 
     display: none;
-    position:fixed;
+    position:relative;
+    float: inline-end;
+    background-color: #F7F2CA;
     z-index: 1;
-    border: 1px solid;
+    border: 1px solid #FAF216;
     padding: 1%;
 
 }
@@ -105,7 +120,22 @@ input, select{
 
 }
 
-@media screen and (max-width: 768px) {
+.modal div{
+
+    display: flex;
+    align-items: center;
+
+}
+
+@media screen and (max-width: 425px) {
+
+    #DescricaoProduto{
+        width: 80vw;
+    }
+
+}
+
+@media screen and (max-width: 768px){
 
     #NomeFuncionario{
         width: 40vw;
@@ -119,9 +149,7 @@ input, select{
         width: 40vw;
     }
 
-    #DescricaoProduto{
-        width: 80vw;
-    }
+    
 
     .tabelaItens {
         
@@ -144,6 +172,14 @@ input, select{
         word-wrap: break-word;
         white-space: normal;
 
+    }
+
+    .BtnInserirItens span{
+        display: inline-block;
+    }
+
+    #DescricaoProduto{
+        width: 40vw;
     }
 
 }

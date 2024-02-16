@@ -148,9 +148,7 @@ function carregarProduto(){
 
   if(produtoFiltrado.length>0){
     produtoFiltrado.forEach(function(produto){
-
       document.getElementById("DescricaoProduto").value=produto.Descricao;
-      document.getElementById("Estoque").value=produto.Estoque;
 
     })
   }
@@ -262,22 +260,53 @@ function carregarProduto(){
         const totalRequisicao = document.getElementById('total');
         const colunas = objLinha.getElementsByTagName('td');
         let valorLinha = colunas[5].innerText;
-        totalRequisicao.textContent = parseFloat(totalRequisicao.textContent - parseFloat(valorLinha));
+        let novoTotal = parseFloat(totalRequisicao.textContent - parseFloat(valorLinha))
+        totalRequisicao.textContent = novoTotal;
+
+        if(novoTotal==0){
+          document.getElementById('btn').style.display='none';
+        }
+
       })
       return btnRemoverItem;
     }
 
 
+
 document.getElementById('BtnInserirItens').addEventListener('click',function(){
   
+  const campoProduto = document.getElementById('CodigoProduto');
+ 
+  const produtoPesquisado = produtos.filter((p)=>p.idProduto==campoProduto.value);
+  var campoEstoque = parseFloat(produtoPesquisado[0].Estoque);
   const campoQuantidade = document.getElementById('Quantidade');
-  const campoEstoque = document.getElementById('Estoque');
-  if((parseFloat(campoQuantidade.value)>0) && (parseFloat(campoEstoque.value)-parseFloat(campoQuantidade.value)>0)){
+
+  if((parseFloat(campoQuantidade.value)>0) && (parseFloat(campoEstoque)-parseFloat(campoQuantidade.value)>0)){
     const tabelaItens = document.getElementById('tabelaItens');
-    const campoProduto = document.getElementById('CodigoProduto');
     const campoDescricaoProduto = document.getElementById('DescricaoProduto');
-    
     const totalRequisicao = document.getElementById('total');
+
+    var linhas = tabelaItens.children;
+
+    if(linhas.length>1){
+
+      for(var i=1; i<linhas.length; i++){
+
+        console.log(linhas[i].children[1].innerHTML);
+        console.log(campoDescricaoProduto.value);
+        console.log(linhas[i].children[1].innerHTML==campoDescricaoProduto.value);
+
+        if(linhas[i].children[1].innerHTML==campoDescricaoProduto.value){
+
+          linhas[i].children[2].innerHTML = parseFloat(linhas[i].children[2].innerHTML) + parseFloat(campoQuantidade.value);
+          linhas[i].children[5].innerHTML = (parseFloat(linhas[i].children[2].innerHTML) * parseFloat(linhas[i].children[4].innerHTML)).toFixed(2);
+          totalRequisicao.textContent = linhas[i].children[5].innerHTML;
+          return;
+        }
+
+      }
+
+    }
 
     const linha = document.createElement('tr');
 
@@ -288,8 +317,8 @@ document.getElementById('BtnInserirItens').addEventListener('click',function(){
     const tdPreco = document.createElement('td');
     const tdTotalLinha = document.createElement('td');
     const tdBtnRemover = document.createElement('td');
-
-    const produtoPesquisado = produtos.filter((p)=>p.idProduto==campoProduto.value);
+    
+    
 
     tdCodigo.innerHTML = campoProduto.value;
     tdDescricao.innerHTML = campoDescricaoProduto.value;
@@ -322,12 +351,9 @@ document.getElementById('BtnInserirItens').addEventListener('click',function(){
     linha.appendChild(tdBtnRemover);
     tabelaItens.appendChild(linha);   
 
-    console.log(campoEstoque.value)
     document.getElementById("btn").style.display="block";
 
-    }
-
-  });
+    }});
 
 
 /* // Seleciona todos os botões de opção
@@ -360,7 +386,10 @@ for (let radio of radios) {
 function apareceModal(){
 
   document.querySelector('.modal').style.display="block"
-
+  document.querySelector('.modal').style.zIndex="2"
+  document.querySelector('.modal').style.float="left"
+  document.querySelector('.modal').style.marginRight="-20vw"
+  document.querySelector('.modal').style.marginTop="-8vh"
 }
 
 function modalSumiu(){
@@ -373,10 +402,30 @@ document.getElementById('Quantidade').addEventListener('blur',e=>{
 
     var idProduto = document.getElementById('CodigoProduto').value
     if(idProduto){
+      
       const produtoPesquisado = produtos.filter((p)=>p.idProduto==parseInt(idProduto));
       var quant = parseInt(e.target.value);
       var dif = parseInt(produtoPesquisado[0].Estoque)-quant;
-      
+      const campoDescricaoProduto = document.getElementById('DescricaoProduto');
+
+      const tabelaItens = document.getElementById('tabelaItens')
+
+      var linhas = tabelaItens.children;
+
+      if(linhas.length>1){
+  
+        for(var i=1; i<linhas.length; i++){
+  
+          if(linhas[i].children[1].innerHTML==campoDescricaoProduto.value){
+  
+            dif = dif - parseFloat(linhas[i].children[2].innerHTML);
+            break;
+          }
+  
+        }
+  
+      } 
+
       if(dif>produtoPesquisado[0].EstoqueMinimo*1.1){
         
         document.getElementById("corEstoqueImg").src ="./assets/img/verde.svg"

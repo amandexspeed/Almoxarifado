@@ -103,10 +103,10 @@
                                 <input type="text" id="DescricaoProduto">
                             </div>
 
-                            <div class="grupoEstoque">
+                            <!-- <div class="grupoEstoque">
                                 <span>Estoque</span>
                                 <input type="text" id="Estoque">
-                            </div>
+                            </div> -->
 
                             <div class="grupoQuantidade">
                                 <span>Quantidade</span>
@@ -115,14 +115,14 @@
                         
                             <div class="grupoStatusEstoque"> 
                                 <div class="corEstoque">
-                                    <img src="./assets/img/verde.svg" alt="" id="corEstoqueImg" onmouseover="apareceModal()" >
+                                    <img src="./assets/img/verde.svg" alt="" id="corEstoqueImg" onmouseover="apareceModal()"  onmouseleave="modalSumiu()">
                                 </div>                           
                                 
-                                <div class="modal" onmouseleave="modalSumiu()">
+                                <div class="modal">
 
-                                    <p>1. Estoque com sobra de acima 10% do estoque mínimo| Cor verde</p>
-                                    <p>2. Estoque com sobra abaixo de 10% do estoque mínimo| Cor amarela</p>
-                                    <p>3. Estoque abaixo do estoque mínimo| Cor vermelha</p>
+                                    <div><img src="assets/img/verde.svg"><p>Estoque com sobra de acima 10% do estoque mínimo</p></div>
+                                    <div><img src="https://www.bing.com/th?id=OIP.-LfoomBRwiE4ucNzaiga6gHaFj&w=148&h=110&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"><p>Estoque com sobra abaixo de 10% do estoque mínimo</p></div>
+                                    <div><img src="https://www.bing.com/th?id=OIP.sB7oAgOuL9mBm8PiFvb_nQHaEo&w=164&h=102&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2"><p>Estoque abaixo do estoque mínimo</p></div>
     
                                 </div>
 
