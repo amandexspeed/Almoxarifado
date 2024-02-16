@@ -282,6 +282,7 @@ document.getElementById('BtnInserirItens').addEventListener('click',function(){
   const campoQuantidade = document.getElementById('Quantidade');
 
   if((parseFloat(campoQuantidade.value)>0) && (parseFloat(campoEstoque)-parseFloat(campoQuantidade.value)>0)){
+    
     const tabelaItens = document.getElementById('tabelaItens');
     const campoDescricaoProduto = document.getElementById('DescricaoProduto');
     const totalRequisicao = document.getElementById('total');
@@ -297,12 +298,21 @@ document.getElementById('BtnInserirItens').addEventListener('click',function(){
         console.log(linhas[i].children[1].innerHTML==campoDescricaoProduto.value);
 
         if(linhas[i].children[1].innerHTML==campoDescricaoProduto.value){
-
+          console.log("Entrou no if");
+          if(parseFloat(linhas[i].children[2].innerHTML)+parseFloat(campoQuantidade.value)<produtoPesquisado[0].Estoque){
+            
           linhas[i].children[2].innerHTML = parseFloat(linhas[i].children[2].innerHTML) + parseFloat(campoQuantidade.value);
           linhas[i].children[5].innerHTML = (parseFloat(linhas[i].children[2].innerHTML) * parseFloat(linhas[i].children[4].innerHTML)).toFixed(2);
           totalRequisicao.textContent = linhas[i].children[5].innerHTML;
+          corBloco();
+          
+          }else{
+
+            alert("Sem estoque")
+
+          }
           return;
-        }
+      }
 
       }
 
@@ -353,7 +363,12 @@ document.getElementById('BtnInserirItens').addEventListener('click',function(){
 
     document.getElementById("btn").style.display="block";
 
-    }});
+    }else{
+
+      alert("Sem estoque")
+
+    }
+  });
 
 
 /* // Seleciona todos os botões de opção
@@ -400,11 +415,17 @@ function modalSumiu(){
 
 document.getElementById('Quantidade').addEventListener('blur',e=>{
 
-    var idProduto = document.getElementById('CodigoProduto').value
+  corBloco()  
+
+});
+
+function corBloco(){
+
+  var idProduto = document.getElementById('CodigoProduto').value
     if(idProduto){
       
       const produtoPesquisado = produtos.filter((p)=>p.idProduto==parseInt(idProduto));
-      var quant = parseInt(e.target.value);
+      var quant = parseInt(document.getElementById('Quantidade').value);
       var dif = parseInt(produtoPesquisado[0].Estoque)-quant;
       const campoDescricaoProduto = document.getElementById('DescricaoProduto');
 
@@ -444,7 +465,8 @@ document.getElementById('Quantidade').addEventListener('blur',e=>{
       alert("Produto não identificado")
 
     }
-});
+
+}
 
 adicionarCoraoFocarInput();
 carregarCategorias();
